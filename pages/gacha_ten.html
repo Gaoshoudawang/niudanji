@@ -896,12 +896,12 @@ window.onload = function(){
     console.log('[预加载模式] gacha_ten 不自动抽奖');
     return;
   }
-  // 等待外部传入的抽奖结果，如果100ms内没收到，就自己随机生成
+  // 等待外部传入的抽奖结果，如果500ms内没收到，就自己随机生成
   setTimeout(function(){
-    if(!hasPlayedTen){
+    if(!hasPlayedTen && !externalItems){
       playTen();
     }
-  }, 100);
+  }, 500);
 };
 </script>
 </body>
