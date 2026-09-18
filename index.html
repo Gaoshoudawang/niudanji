@@ -749,6 +749,14 @@ function getEggType(itemName){
   return 'white';
 }
 
+// 非保底获得的闪金蛋道具降级为普通金蛋（只有保底闪金蛋才播放闪金蛋视频）
+function adjustEggTypeForNonGuarantee(item){
+  if(!item.isGuarantee && (item.name === '炫闪·G3A3-凤雏' || item.name === '【26年元旦扭蛋机】三国武器自选卡')){
+    item.eggType = 'gold';
+  }
+  return item;
+}
+
 // 获取10个道具中最高蛋品质
 function getHighestEggType(items){
   var priority = {
@@ -1969,6 +1977,8 @@ function openGachaSingle(){
   }else{
     item = randomGachaItem();
   }
+  // 非保底获得的闪金蛋道具降级为普通金蛋
+  adjustEggTypeForNonGuarantee(item);
   
   // 保存当前抽奖结果
   currentSingleItem = item;
@@ -2062,6 +2072,8 @@ function openGachaTen(){
     }else{
       item = randomGachaItem();
     }
+    // 非保底获得的闪金蛋道具降级为普通金蛋
+    adjustEggTypeForNonGuarantee(item);
     tenItems.push(item);
   }
   updateTotalDrawCount();
