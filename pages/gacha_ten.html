@@ -520,6 +520,7 @@ window.addEventListener('message', function(e){
   if(e.data && e.data.type === 'setGachaResult' && e.data.items && e.data.items.length > 0){
     // 扭蛋机：接收外部传入的10个抽奖结果（先抽后播视频再展示）
     externalItems = e.data.items;
+    hasPlayedTen = false; // 重置标志位，允许重新播放
     // 立即展示
     playTen();
   }

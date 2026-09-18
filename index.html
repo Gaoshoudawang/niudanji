@@ -2221,7 +2221,7 @@ function closeDecomposeReward(points){
     try{
       var storageIframe = document.getElementById('storageIframe');
       if(storageIframe && storageIframe.contentWindow){
-        storageIframe.contentWindow.postMessage({type:'updatePoints', points: pointsCount}, '*');
+        storageIframe.contentWindow.postMessage({type:'updatePoints', points: gachaCoinCount}, '*');
       }
     }catch(e){}
   }
@@ -2489,13 +2489,13 @@ window.addEventListener('message', function(e){
   if(e.data && e.data.type === 'requestPoints'){
     var storageIframe = document.getElementById('storageIframe');
     if(storageIframe && storageIframe.contentWindow){
-      storageIframe.contentWindow.postMessage({type:'updatePoints', points: pointsCount}, '*');
+      storageIframe.contentWindow.postMessage({type:'updatePoints', points: gachaCoinCount}, '*');
     }
   }
   if(e.data && e.data.type === 'requestStorageData'){
     var storageIframe = document.getElementById('storageIframe');
     if(storageIframe && storageIframe.contentWindow){
-      storageIframe.contentWindow.postMessage({type:'storageData', items: storageItems, points: pointsCount}, '*');
+      storageIframe.contentWindow.postMessage({type:'storageData', items: storageItems, points: gachaCoinCount}, '*');
     }
   }
   if(e.data && e.data.type === 'decomposeItems'){
@@ -2524,7 +2524,7 @@ window.addEventListener('message', function(e){
     // 重新发送数据给暂存箱页面
     var storageIframe = document.getElementById('storageIframe');
     if(storageIframe && storageIframe.contentWindow){
-      storageIframe.contentWindow.postMessage({type:'decomposeSuccess', items: storageItems, points: pointsCount}, '*');
+      storageIframe.contentWindow.postMessage({type:'decomposeSuccess', items: storageItems, points: gachaCoinCount}, '*');
     }
   }
   if(e.data === 'closeGachaSingle'){
@@ -2939,7 +2939,7 @@ function doExchange(){
   try{
     var exchangeIframe = document.getElementById('exchangeIframe');
     if(exchangeIframe && exchangeIframe.contentWindow){
-      exchangeIframe.contentWindow.postMessage({type:'updatePoints', points: pointsCount}, '*');
+      exchangeIframe.contentWindow.postMessage({type:'updatePoints', points: gachaCoinCount}, '*');
     }
   }catch(e){}
   
@@ -2975,7 +2975,7 @@ function openExchange(){
   // 传递兑换币数量给兑换商城
   setTimeout(function(){
     try{
-      iframe.contentWindow.postMessage({type:'updatePoints', points: pointsCount}, '*');
+      iframe.contentWindow.postMessage({type:'updatePoints', points: gachaCoinCount}, '*');
     }catch(e){}
   }, 300);
   setTimeout(function(){
