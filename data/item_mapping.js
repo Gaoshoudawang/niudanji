@@ -1,0 +1,65 @@
+// ============================================================
+// 扭蛋机 - 统一道具映射配置文件
+// 所有页面都引用这个文件，换皮只需要改这一个文件
+// ============================================================
+
+// ITEM_SMALL_IMAGES
+window.ITEM_SMALL_IMAGES = {
+  '炫闪·G3A3-凤雏': 'images/items_box/炫闪G3A3-凤雏/item.png',
+  '【26年元旦扭蛋机】三国武器自选卡': 'images/items_box/三国武器自选卡/item.png',
+  '【26年元旦扭蛋机】破空枪刃黑龙魂自选卡': 'images/items_box/破空枪刃黑龙魂自选卡/item.png',
+  '【26年元旦扭蛋机】C4皮肤自选卡': 'images/items_box/C4皮肤自选卡/item.png',
+  '【26年元旦扭蛋机】副武器自选卡': 'images/items_box/副武器自选卡/item.png',
+  '三国皮肤自选卡': 'images/items_box/三国皮肤自选卡/item.png',
+  '星象投掷自选卡': 'images/items_box/星象投掷自选卡/item.png',
+  '9A91-游骑兵': 'images/items_box/9A91-游骑兵/item.png',
+  'M4A1-竞界荣光': 'images/items_box/M4A1-竞界荣光/item.png',
+  'Origin12-小熊软糖': 'images/items_box/Origin12-小熊软糖/item.png',
+  'M1887-动能冲击': 'images/items_box/M1887-动能冲击/item.png',
+  'AK47-钢铁狂热': 'images/items_box/AK47-钢铁狂热/item.png',
+  'AN94-超新星': 'images/items_box/AN94-超新星/item.png',
+  '巴雷特-金色蔷薇': 'images/items_box/巴雷特-金色蔷薇/item.png',
+  '沙鹰-天神': 'images/items_box/沙鹰-天神/item.png',
+  '09式狙-天神': 'images/items_box/09式狙-天神/item.png',
+  '双持斯泰尔-天使': 'images/items_box/双持斯泰尔-天使/item.png',
+  'QSZ92-天使': 'images/items_box/QSZ92-天使/item.png',
+  '神罚战斧': 'images/items_box/神罚战斧/item.png',
+  '麒麟刺': 'images/items_box/麒麟刺/item.png',
+  '高爆手雷-雷暴': 'images/items_box/高爆手雷-雷暴/item.png',
+  '扭蛋币': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×18': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×12': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×6': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×3': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×2': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×1': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×10': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×55': 'images/items_box/扭蛋币/item.png',
+  '扭蛋币×110': 'images/items_box/扭蛋币/item.png',
+};
+
+// ITEM_BOX_IMAGES（大盒子图）
+window.ITEM_BOX_IMAGES = {
+  '炫闪·G3A3-凤雏': 'images/items_box/炫闪G3A3-凤雏/item.png',
+  '【26年元旦扭蛋机】三国武器自选卡': 'images/items_box/三国武器自选卡/item.png',
+  '【26年元旦扭蛋机】破空枪刃黑龙魂自选卡': 'images/items_box/破空枪刃黑龙魂自选卡/item.png',
+  '【26年元旦扭蛋机】C4皮肤自选卡': 'images/items_box/C4皮肤自选卡/item.png',
+  '【26年元旦扭蛋机】副武器自选卡': 'images/items_box/副武器自选卡/item.png',
+  '三国皮肤自选卡': 'images/items_box/三国皮肤自选卡/item.png',
+  '星象投掷自选卡': 'images/items_box/星象投掷自选卡/item.png',
+  '9A91-游骑兵': 'images/items_box/9A91-游骑兵/item.png',
+  'M4A1-竞界荣光': 'images/items_box/M4A1-竞界荣光/item.png',
+  'Origin12-小熊软糖': 'images/items_box/Origin12-小熊软糖/item.png',
+  'M1887-动能冲击': 'images/items_box/M1887-动能冲击/item.png',
+  'AK47-钢铁狂热': 'images/items_box/AK47-钢铁狂热/item.png',
+  'AN94-超新星': 'images/items_box/AN94-超新星/item.png',
+  '巴雷特-金色蔷薇': 'images/items_box/巴雷特-金色蔷薇/item.png',
+  '沙鹰-天神': 'images/items_box/沙鹰-天神/item.png',
+  '09式狙-天神': 'images/items_box/09式狙-天神/item.png',
+  '双持斯泰尔-天使': 'images/items_box/双持斯泰尔-天使/item.png',
+  'QSZ92-天使': 'images/items_box/QSZ92-天使/item.png',
+  '神罚战斧': 'images/items_box/神罚战斧/item.png',
+  '麒麟刺': 'images/items_box/麒麟刺/item.png',
+  '高爆手雷-雷暴': 'images/items_box/高爆手雷-雷暴/item.png',
+  '扭蛋币': 'images/items_box/扭蛋币/item.png',
+};

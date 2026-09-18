@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{
+  width:100%;height:100%;
+  background:#000;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/* canvas显示视频，完全在页面内，浏览器无法提取 */
+#videoCanvas{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  background:#000;
+  display:block;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+/* 隐藏的video元素，只用于播放音频和解码视频帧 */
+/* 不放在屏幕外（某些浏览器会静音屏幕外的视频），而是用极小尺寸+透明+低层级隐藏 */
+#hiddenVideo{
+  position:fixed;
+  top:0;
+  left:0;
+  width:1px;
+  height:1px;
+  opacity:0.01;
+  z-index:-1;
+  pointer-events:none;
+}
+</style>
+</head>
+<body>
+<canvas id="videoCanvas"></canvas>
+<video id="hiddenVideo" 
+       playsinline 
+       webkit-playsinline>
+</video>
+<script>
+var canvas = document.getElementById('videoCanvas');
+var ctx = canvas.getContext('2d');
+var video = document.getElementById('hiddenVideo');
+var finished = false;
+var animId = null;
+
+// 从URL参数获取视频源
+var urlParams = new URLSearchParams(window.location.search);
+var videoSrc = urlParams.get('src') || '';
+
+function notifyFinish(){
+  if(finished) return;
+  finished = true;
+  // 停止绘制循环
+  if(animId){
+    cancelAnimationFrame(animId);
+    animId = null;
+  }
+  // 停止视频并清理
+  try{
+    video.pause();
+    video.src = '';
+    video.load();
+  }catch(e){}
+  // 清空canvas
+  try{
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 0;
+    canvas.height = 0;
+  }catch(e){}
+  // 通知父页面视频结束
+  window.parent.postMessage({type: 'eggVideoFinished'}, '*');
+}
+
+// 把视频帧绘制到canvas
+function drawFrame(){
+  if(finished) return;
+  if(video.readyState >= 2 && video.videoWidth > 0){
+    // 设置canvas尺寸为视频原始尺寸
+    if(canvas.width !== video.videoWidth || canvas.height !== video.videoHeight){
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    }
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  }
+  animId = requestAnimationFrame(drawFrame);
+}
+
+if(videoSrc){
+  video.src = videoSrc;
+  video.load();
+  // 关键：先尝试静音播放（大多数浏览器允许静音自动播放，绕过自动播放限制）
+  // 静音播放成功后再取消静音恢复声音
+  video.muted = true;
+  video.volume = 1;
+  video.play().then(function(){
+    // 静音播放成功后，尝试取消静音恢复声音
+    video.muted = false;
+    video.volume = 1;
+    // 播放成功后开始绘制
+    drawFrame();
+  }).catch(function(e){
+    // 静音播放也失败，尝试有声音播放（某些浏览器只允许有声音播放）
+    video.muted = false;
+    video.play().then(function(){
+      drawFrame();
+    }).catch(function(e2){
+      // 都失败，直接结束
+      setTimeout(notifyFinish, 500);
+    });
+  });
+}else{
+  setTimeout(notifyFinish, 300);
+}
+
+video.onended = notifyFinish;
+video.onerror = function(){ setTimeout(notifyFinish, 500); };
+
+// 不允许点击跳过（移除点击事件）
+// 视频必须完整播放，播放结束后自动关闭
+
+// 禁用双击全屏
+document.body.ondblclick = function(e){
+  e.preventDefault();
+  return false;
+};
+canvas.ondblclick = function(e){
+  e.preventDefault();
+  return false;
+};
+
+// 禁用右键菜单
+document.oncontextmenu = function(){ return false; };
+
+// 禁用手势缩放
+document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+document.addEventListener('touchmove', function(e){
+  if(e.touches.length > 1) e.preventDefault();
+}, {passive: false});
+
+// 禁用键盘控制
+document.addEventListener('keydown', function(e){
+  e.preventDefault();
+  return false;
+});
+
+// 最多10秒强制结束
+setTimeout(notifyFinish, 10000);
+</script>
+</body>
+</html>
